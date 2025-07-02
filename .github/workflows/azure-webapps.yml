@@ -1,4 +1,4 @@
-name: Deploy Flask App to Azure App Service
+name: Deploy Flask App to Azure Web App
 
 on:
   push:
@@ -23,13 +23,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Archive app files
+      - name: Archive app
         run: zip -r app.zip . -x '*.git*'
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
-          app-name: eventportal-backend             # Your Azure App Service name
+          app-name: eventportal-backend
           slot-name: production
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: app.zip
