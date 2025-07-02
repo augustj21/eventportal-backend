@@ -96,6 +96,12 @@ def register_user():
         return redirect(url_for('login'))
     return render_template('register_user.html')
 
+@app.route('/init-db')
+def init_db():
+    from models import db
+    db.create_all()
+    return "Database tables created!"
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
