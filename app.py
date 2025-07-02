@@ -13,8 +13,16 @@ db.init_app(app)
 
 @app.route('/home')
 def home():
+    from models import Event, Attendee
     events = Event.query.all()
-    return render_template('home.html', events=events)
+
+    # Create a dictionary mapping event.id -> number of registrations
+    attendee_counts = {
+        event.id: Attendee.query.filter_by(event_id=event.id).count()
+        for event in events
+    }
+
+    return render_template('home.html', events=events, attendee_counts=attendee_counts)
 
 @app.route('/add-event', methods=['GET', 'POST'])
 def add_event():
@@ -95,6 +103,26 @@ def register_user():
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('register_user.html')
+
+@app.route('/attendees')
+def view_attendees():
+    if 'role' not in session or session['role'] != 'organizer':
+        return redirect(url_for('login'))
+
+    from models import Attendee, Event
+    attendees = Attendee.query.all()
+    events = {e.id: e.name for e in Event.query.all()}
+    return render_template('view_attendees.html', attendees=attendees, events=events)
+
+@app.route('/attendees/event/<int:event_id>')
+def view_attendees_event(event_id):
+    if 'role' not in session or session['role'] != 'organizer':
+        return redirect(url_for('login'))
+
+    from models import Attendee, Event
+    event = Event.query.get_or_404(event_id)
+    attendees = Attendee.query.filter_by(event_id=event_id).all()
+    return render_template('view_attendees_event.html', attendees=attendees, event=event)
 
 if __name__ == '__main__':
     with app.app_context():

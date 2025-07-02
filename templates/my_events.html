@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Registered Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      background-color: white;
+      border-collapse: collapse;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #16a085;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .back {
+      margin-top: 20px;
+    }
+
+    .back button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back button:hover {
+      background-color: #1c6690;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📄 My Registered Events</h1>
+
+  <table>
+    <tr>
+      <th>Event</th>
+      <th>Date</th>
+      <th>Location</th>
+    </tr>
+    {% for a in attendances %}
+    <tr>
+      <td>{{ events[a.event_id].name }}</td>
+      <td>{{ events[a.event_id].date }}</td>
+      <td>{{ events[a.event_id].location }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="back">
+    <form action="{{ url_for('home') }}">
+      <button>🏠 Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>

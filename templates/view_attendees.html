@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Registered Attendees</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    table {
+      width: 100%;
+      background-color: white;
+      border-collapse: collapse;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .back {
+      margin-top: 20px;
+    }
+
+    .back button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .back button:hover {
+      background-color: #1c6690;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 Registered Attendees</h1>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Event</th>
+    </tr>
+    {% for attendee in attendees %}
+    <tr>
+      <td>{{ attendee.name }}</td>
+      <td>{{ attendee.email }}</td>
+      <td>{{ events[attendee.event_id] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <div class="back">
+    <form action="{{ url_for('home') }}">
+      <button>🏠 Back to Home</button>
+    </form>
+  </div>
+
+</body>
+</html>
