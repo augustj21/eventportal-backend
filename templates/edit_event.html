@@ -1,31 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Edit Event</title>
+  <title>Edit Event - EventHorizon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    input[type="submit"],
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #3498db;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #d35400;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
 </head>
 <body>
-  <h1>Edit Event</h1>
-  <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST">
-    <label>Event Name:</label><br>
-    <input type="text" name="name" value="{{ event.name }}" required><br>
 
-    <label>Date:</label><br>
-    <input type="text" name="date" value="{{ event.date }}" required><br>
+  <div class="container">
+    <h1>✏️ Edit Event</h1>
+    <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST">
+      <label>Event Name:</label>
+      <input type="text" name="name" value="{{ event.name }}" required>
 
-    <label>Description:</label><br>
-    <textarea name="description" required>{{ event.description }}</textarea><br>
+      <label>Date:</label>
+      <input type="text" name="date" value="{{ event.date }}" required>
 
-    <label>Location:</label><br>
-    <input type="text" name="location" value="{{ event.location }}" required><br>
+      <label>Description:</label>
+      <textarea name="description" required>{{ event.description }}</textarea>
 
-    <label>Capacity:</label><br>
-    <input type="number" name="capacity" value="{{ event.capacity }}" required><br><br>
+      <label>Location:</label>
+      <input type="text" name="location" value="{{ event.location }}" required>
 
-    <input type="submit" value="Update Event">
-  </form>
+      <label>Capacity:</label>
+      <input type="number" name="capacity" value="{{ event.capacity }}" min="1" required>
 
-  <form action="{{ url_for('home') }}" method="get">
-    <button type="submit">🏠 Back to Home</button>
-  </form>
+      <input type="submit" value="Update Event">
+    </form>
+
+    <form action="{{ url_for('home') }}" method="get">
+      <button type="submit">🏠 Back to Home</button>
+    </form>
+  </div>
+
 </body>
 </html>

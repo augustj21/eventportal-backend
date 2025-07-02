@@ -1,12 +1,102 @@
-<h2>Login</h2>
-<form method="POST">
-  Email: <input type="email" name="email"><br>
-  Password: <input type="password" name="password"><br>
-  Role:
-  <select name="role">
-    <option value="organizer">Organizer</option>
-    <option value="attendee">Attendee</option>
-  </select><br><br>
-  <button type="submit">Login</button>
-</form>
-<a href="{{ url_for('register_user') }}">No account? Register here</a>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - EventHorizon</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 15px;
+      display: block;
+    }
+
+    .register-link a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .register-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🔐 Login</h2>
+    <form method="POST">
+      <label for="email">Email</label>
+      <input type="email" name="email" required>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" required>
+
+      <label for="role">Role</label>
+      <select name="role">
+        <option value="organizer">Organizer</option>
+        <option value="attendee">Attendee</option>
+      </select>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="register-link">
+      <p>No account? <a href="{{ url_for('register_user') }}">Register here</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
