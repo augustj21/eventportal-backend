@@ -126,6 +126,11 @@
         <a href="{{ url_for('login') }}"><button>🔐 Login</button></a>
         <a href="{{ url_for('register_user') }}"><button>📝 Register</button></a>
       {% endif %}
+      {% if session.get('role') == 'attendee' %}
+        <form action="{{ url_for('my_events') }}" method="get" style="display:inline;">
+          <button>📖 My Events</button>
+        </form>
+      {% endif %}
     </div>
   </div>
 

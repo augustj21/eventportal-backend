@@ -123,6 +123,20 @@ def view_attendees_event(event_id):
     event = Event.query.get_or_404(event_id)
     attendees = Attendee.query.filter_by(event_id=event_id).all()
     return render_template('view_attendees_event.html', attendees=attendees, event=event)
+@app.route('/my-events')
+def my_events():
+    if 'role' not in session or session['role'] != 'attendee':
+        return redirect(url_for('login'))
+
+    from models import Event, Attendee
+    user_email = session.get('user')
+
+    # Get all event IDs this attendee registered for
+    attendee_records = Attendee.query.filter_by(email=user_email).all()
+    event_ids = [a.event_id for a in attendee_records]
+    events = Event.query.filter(Event.id.in_(event_ids)).all()
+
+    return render_template('my_events.html', events=events)
 
 if __name__ == '__main__':
     with app.app_context():
