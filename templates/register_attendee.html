@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register for {{ event.name }}</title>
+</head>
+<body>
+  <h1>Register for {{ event.name }}</h1>
+  <form method="POST">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <button type="submit">✅ Register</button>
+  </form>
+
+  <br>
+  <form action="{{ url_for('home') }}">
+    <button type="submit">🏠 Back to Home</button>
+  </form>
+</body>
+</html>

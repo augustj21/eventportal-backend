@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Event</title>
+</head>
+<body>
+  <h1>Add New Event</h1>
+  <form action="{{ url_for('add_event') }}" method="POST">
+    <label>Event Name:</label><br>
+    <input type="text" name="name"><br>
+
+    <label>Date:</label><br>
+    <input type="text" name="date" placeholder="YYYY-MM-DD"><br>
+
+    <label>Description:</label><br>
+    <textarea name="description"></textarea><br>
+
+    <label>Location:</label><br>
+    <input type="text" name="location"><br>
+
+    <label>Capacity:</label><br>
+    <input type="number" name="capacity"><br><br>
+
+    <input type="submit" value="Create Event">
+  </form>
+
+  <br>
+  <form action="{{ url_for('home') }}" method="get">
+    <button type="submit">🏠 Back to Home</button>
+  </form>
+</body>
+</html>
