@@ -32,6 +32,7 @@
 
     input[type="text"],
     input[type="number"],
+    input[type="date"],
     textarea {
       width: 100%;
       padding: 10px;
@@ -78,10 +79,10 @@
     <h1>✏️ Edit Event</h1>
     <form action="{{ url_for('edit_event', event_id=event.id) }}" method="POST">
       <label>Event Name:</label>
-      <input type="date" name="date" value="{{ event.date }}" required>
+      <input type="text" name="name" value="{{ event.name }}" required>
 
       <label>Date:</label>
-      <input type="text" name="date" value="{{ event.date }}" required>
+      <input type="date" name="date" value="{{ event.date }}" required>
 
       <label>Description:</label>
       <textarea name="description" required>{{ event.description }}</textarea>
